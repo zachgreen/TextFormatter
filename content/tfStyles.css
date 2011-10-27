@@ -1,0 +1,22 @@
+﻿body { font-family: 'Molengo', arial, serif; font-size:14px;}
+
+
+#tf_title { padding:5px; font-size:36px;}
+#tf_modifier_container { padding:5px; margin-top:10px;  }
+#tf_modifier_container_title{ font-size:18px; font-weight:bold; }
+
+
+.tf_modifier_section { float:left; padding-right:50px; padding-top:10px;}
+.tf_modifier_section_name { font-size:16px; padding-bottom:5px;}
+.tf_modifier_section_controls { float:left; }
+.tf_hidden_modifier_property {  display:none; padding-top:3px; }
+
+.tf_modifier_submit{ clear:both; padding-top:10px;  }
+.tf_container { padding:5px; margin-top:10px; clear:both; width:75%; }
+.tf_container_title { float:left; font-size:18px; font-weight:bold; }
+.tf_container_buttons { float:right; padding-bottom:5px; }
+.tf_container_field { }
+
+
+.shown{ display:inline; }
+.hidden{ display:none; }
