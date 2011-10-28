@@ -1,93 +1,99 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
-    <title>Text Formatter</title>
-    <link href="content/tfStyles.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <div>
-		<!-- Begin Includes -->
-		<script src="scripts/jquery-1.4.4.js")" type="text/javascript"></script>
-		<script src="scripts/jquery-ui-1.8.1.custom.min.js" type="text/javascript"></script>
-		<script src="scripts/tfClientSide.js" type="text/javascript"></script>
-		<link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css' />
-		<!-- End Includes -->
-
-		<div id="tf_title">Text Formatter</div>
-		<div class="tf_container">
-			<div class="tf_container_title">Input</div>
-			<div class="tf_container_buttons"><input id="btnClearInputField" type="button" title="Clear Input Field" value="Clear Input Field" /></div>
-			<div class="tf_container_field">
-				<textarea id="txtInput" name="txtInput" tabindex="0" title="Input Text" cols="115" rows="15"></textarea>
-			</div>
-		</div>
-		<div id="tf_modifier_container">
-			<div id="tf_modifier_container_title">Text Modifiers</div>
-			<div class="tf_modifier_section">
-				<div class="tf_modifier_section_name">Line Formatting:</div>
-				<div class="tf_modifier_section_controls">
-					<div class="tf_modifier_section_control">
-						<input id="ckbAddLineBreaks" type="checkbox" title="Add line breaks?"  /><span>&nbsp;Insert Line Breaks</span>
-						<div class="tf_hidden_modifier_property">
-							&nbsp;&nbsp;<span>Characters per line:&nbsp;</span>
-							<input id="txtCharsPerLine" type="text" title="Characters per line" size="5" maxlength="5" />
-						</div>
-						<div class="tf_hidden_modifier_property">
-							&nbsp;&nbsp;<span>Line Break Character:&nbsp;</span>
-							<input id="txtLineBreakCharacter" type="text" title="Line Break Character" size="1" maxlength="1" />
-						</div>
-					</div>
-					<div class="tf_modifier_section_control">
-						<input id="ckbRemoveLineBreaks" type="checkbox" title="Remove line breaks?"  /><span>&nbsp;Remove Line Breaks</span>
-					</div>
-					<div class="tf_modifier_section_control">
-						<input id="ckbToUpper" type="checkbox" title="Convert To Uppercase?"  /><span>&nbsp;Convert to Uppercase</span>
-					</div>
-					<div class="tf_modifier_section_control">
-						<input id="ckbToLower" type="checkbox" title="Convert to Lowercase?"  /><span>&nbsp;Convert to Lowercase</span>
-					</div>
-				</div>
-			</div>
-			<div class="tf_modifier_section">
-				<div class="tf_modifier_section_name">Input Type</div>
-				<div class="tf_modifier_section_controls">
-					<select id="ddlInputType" title="Input Type">
-						<option value="text">Text</option>
-						<option value="vbsb">VB.NET StringBuilder</option>
-						<option value="csharp">C# StringBuilder</option>
-						<option value="sql">SQL</option>
-					</select>
-				</div>
-			</div>
-			<div class="tf_modifier_section">
-				<div class="tf_modifier_section_name">Output Type</div>
-				<div class="tf_modifier_section_controls">
-					<select id="ddlOutputType" title="Output Type">
-						<option value="text">Text</option>
-						<option value="vbsb">VB.NET StringBuilder</option>
-						<option value="csharp">C# StringBuilder</option>
-					</select>
-				</div>
-			</div>
-			<div id="divSBVarName" class="tf_modifier_section">
-				<div class="tf_modifier_section_name">StringBuilder Variable Name</div>
-				<div class="tf_modifier_section_controls">
-					<input type="text" id="txtVarName" title="StringBuilder Variable Name" />
-				</div>
-			</div>
-			<div class="tf_modifier_submit"><input type="button" id="btnSubmitModifiers" title="Submit Modifiers" value="Submit Modifiers" /></div>
-		</div>
-		<div class="tf_container">
-			<div class="tf_container_title">Output</div>
-			<div class="tf_container_buttons">
-				<input id="btnCopyToClipboard" type="button" title="Copy Output to Clipboard" value="Copy Output to Clipboard" />
-				<input id="btnCopyToInput" type="button" title="Copy Output to Input Field" value="Copy Output to Input Field" />
-				<input id="btnClearOutputField" type="button" title="Clear Output Field" value="Clear Output Field" />
-			</div>
-			<div class="tf_container_field">
-				<textarea id="txtOutput" name="txtOutput" tabindex="1" title="Output Text" cols="115" rows="15"></textarea>
-			</div>
-		</div>
-    </div>
-</body>
+    <head runat="server">
+        <title>Text Formatter</title>
+        <link href="content/tfStyles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div>
+            <div id="tf_title">Text Formatter</div>
+            <div id="tf">
+                <div class="tf_container">
+                    <div class="tf_container_toprow">
+                        <div class="tf_container_title">Input</div>
+                        <div class="tf_container_buttons"><input id="btnClearInputField" type="button" class="button" title="Clear Input Field" value="Clear Input Field" /></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="tf_container_field">
+                        <textarea id="txtInput" name="txtInput" tabindex="0" title="Input Text"></textarea>
+                    </div>
+                </div>
+                <div id="tf_modifier_container">
+                    <div id="tf_modifier_container_title">Text Modifiers</div>
+                    <div class="tf_modifier_section">
+                        <div class="tf_modifier_section_name">Line Formatting:</div>
+                        <div class="tf_modifier_section_controls">
+                            <div class="tf_modifier_section_control">
+                                <input id="ckbAddLineBreaks" type="checkbox" title="Add line breaks?"  /><span>&nbsp;Insert Line Breaks</span>
+                                <div class="tf_hidden_modifier_property">
+                                    &nbsp;&nbsp;<span>Characters per line:&nbsp;</span>
+                                    <input id="txtCharsPerLine" type="text" title="Characters per line" size="5" maxlength="5" />
+                                </div>
+                                <div class="tf_hidden_modifier_property">
+                                    &nbsp;&nbsp;<span>Line Break Character:&nbsp;</span>
+                                    <input id="txtLineBreakCharacter" type="text" title="Line Break Character" size="1" maxlength="1" />
+                                </div>
+                            </div>
+                            <div class="tf_modifier_section_control">
+                                <input id="ckbRemoveLineBreaks" type="checkbox" title="Remove line breaks?"  /><span>&nbsp;Remove Line Breaks</span>
+                            </div>
+                            <div class="tf_modifier_section_control">
+                                <input id="ckbToUpper" type="checkbox" title="Convert To Uppercase?"  /><span>&nbsp;Convert to Uppercase</span>
+                            </div>
+                            <div class="tf_modifier_section_control">
+                                <input id="ckbToLower" type="checkbox" title="Convert to Lowercase?"  /><span>&nbsp;Convert to Lowercase</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tf_modifier_section">
+                        <div class="tf_modifier_section_name">Input Type</div>
+                        <div class="tf_modifier_section_controls">
+                            <select id="ddlInputType" title="Input Type">
+                                <option value="text">Text</option>
+                                <option value="vbsb">VB.NET StringBuilder</option>
+                                <option value="csharp">C# StringBuilder</option>
+                                <option value="sql">SQL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tf_modifier_section">
+                        <div class="tf_modifier_section_name">Output Type</div>
+                        <div class="tf_modifier_section_controls">
+                            <select id="ddlOutputType" title="Output Type">
+                                <option value="text">Text</option>
+                                <option value="vbsb">VB.NET StringBuilder</option>
+                                <option value="csharp">C# StringBuilder</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="divSBVarName" class="tf_modifier_section">
+                        <div class="tf_modifier_section_name">StringBuilder Variable Name</div>
+                        <div class="tf_modifier_section_controls">
+                            <input type="text" id="txtVarName" title="StringBuilder Variable Name" />
+                        </div>
+                    </div>
+                    <div class="tf_modifier_submit"><input type="button" class="button" id="btnSubmitModifiers" title="Submit Modifiers" value="Submit Modifiers" /></div>
+                </div>
+                <div class="tf_container">
+                    <div class="tf_container_title">Output</div>
+                    <div class="tf_container_buttons">
+                        <input id="btnCopyToClipboard" type="button" class="button" title="Copy Output to Clipboard" value="Copy Output to Clipboard" />
+                        <input id="btnCopyToInput" type="button" class="button" title="Copy Output to Input Field" value="Copy Output to Input Field" />
+                        <input id="btnClearOutputField" type="button" class="button" title="Clear Output Field" value="Clear Output Field" />
+                    </div>
+                    <div class="tf_container_field">
+                        <textarea id="txtOutput" name="txtOutput" tabindex="1" title="Output Text" cols="115" rows="15"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Begin Includes -->
+        <script src="https://www.google.com/jsapi?key=ABQIAAAAs5zrlYdeca4t0WALyrYv2xT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTVgvbf7hcNAi9nmYsjlKkkoH6yvw" type="text/javascript"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.6.4");
+            google.load("jqueryui", "1.8.16");
+        </script>
+        <script src="scripts/tfClientSide.js" type="text/javascript"></script>
+        <!-- End Includes -->
+    </body>
 </html>

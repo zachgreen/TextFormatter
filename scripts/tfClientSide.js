@@ -1,5 +1,5 @@
-﻿///<reference path="jquery-1.4.4.js" />
-
+/// <reference path="jquery-1.6.4.js" />
+/// <reference path="jquery-1.6-vsdoc.js" />
 $(document).ready(function () {
     //initial hide
     $('.tf_hidden_modifier_property').hide();
