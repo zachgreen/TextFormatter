@@ -54,6 +54,28 @@ $(document).ready(function () {
         }
     });
 
+    var isLeft = true;
+    var container = $('#tf');
+    //var left = $('#switchLeft');
+    //var right = $('#switchRight');
+    //var leftContainer = $('#tf_modifier_left');
+    //var rightContainer = $('#tf_modifier_right');
+    //rightContainer.hide();
+    //left.click(function () {
+    //    container.animate({ left: '-72%' }, 400);
+    //    rightContainer.show();
+    //    leftContainer.hide();
+    //});
+    //right.click(function () {
+    //    container.animate({ left: '0%' }, 400);
+    //    rightContainer.hide();
+    //    leftContainer.show();
+    //});
+    $('#btnSubmitModifiers').click(function () {
+        container.animate({ left: '-100%' }, 400);
+        $('#tf_modifier_container').appendTo($('#tf_modifier_output'));
+    });
+
 });
 
 function SubmitModifiers(input, outputField) {
