@@ -3,6 +3,7 @@
     <head runat="server">
         <title>Text Formatter</title>
         <link href="content/tfStyles.css" rel="stylesheet" type="text/css" />
+        <link href="content/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div>
@@ -12,11 +13,11 @@
                     <div id="tf_container_1" class="tf_container">
                         <div class="tf_container_toprow">
                             <div class="tf_container_title">Input</div>
-                            <div class="tf_container_buttons"><input id="btnClearInputField" type="button" class="button" title="Clear Input Field" value="Clear Input Field" /></div>
+                            <div class="tf_container_buttons"><input id="btnClearInputField" type="button" class="button input-bar-button" title="Clear Input Field" value="Clear Input Field" /></div>
                             <div class="clear"></div>
                         </div>
                         <div class="tf_container_field">
-                            <textarea class="tf_input" id="txtInput" name="txtInput" tabindex="0" title="Input Text"></textarea>
+                            <textarea class="tf_input" id="txtInput" name="txtInput" tabindex="0"></textarea>
                         </div>
                     </div>
                     <div id="tf_modifier_input" class="tf_modifier">
@@ -74,8 +75,8 @@
                                     <input type="text" id="txtVarName" title="StringBuilder Variable Name" />
                                 </div>
                             </div>
-                            <div class="tf_modifier_button"><input type="button" class="button" id="btnSubmitModifiers" title="Submit Modifiers" value="Submit Modifiers" /></div>
-                            <div class="tf_modifier_button"><input type="button" class="button" id="btnFlipBack" title="Back to Input" value="Back to Input" style="display:none;" /></div>
+                            <div class="tf_modifier_button"><input type="button" class="button modifier-button" id="btnSubmitModifiers" title="Submit Modifiers" value="Submit Modifiers" /></div>
+                            <div class="tf_modifier_button"><input type="button" class="button modifier-button" id="btnFlipBack" title="Back to Input" value="Back to Input" style="display:none;" /></div>
                         </div>
                     </div>
                 </div>
@@ -88,14 +89,14 @@
                         <div class="tf_container_toprow">
                             <div class="tf_container_title">Output</div>
                             <div class="tf_container_buttons">
-                                <input id="btnCopyToClipboard" type="button" class="button" title="Copy Output to Clipboard" value="Copy Output to Clipboard" />
-                                <input id="btnCopyToInput" type="button" class="button" title="Copy Output to Input Field" value="Copy Output to Input Field" />
-                                <input id="btnClearOutputField" type="button" class="button" title="Clear Output Field" value="Clear Output Field" />
+                                <input id="btnCopyToClipboard" type="button" class="button input-bar-button" title="Copy Output to Clipboard" value="Copy Output to Clipboard" />
+                                <input id="btnCopyToInput" type="button" class="button input-bar-button" title="Copy Output to Input Field" value="Copy Output to Input Field" />
+                                <input id="btnClearOutputField" type="button" class="button input-bar-button" title="Clear Output Field" value="Clear Output Field" />
                             </div>
                             <div class="clear"></div>
                         </div>
                         <div class="tf_container_field">
-                            <textarea class="tf_input" id="txtOutput" name="txtOutput" tabindex="1" title="Output Text"></textarea>
+                            <textarea class="tf_input" id="txtOutput" name="txtOutput" tabindex="1"></textarea>
                         </div>
                     </div>
                 </div>                
@@ -108,6 +109,7 @@
             google.load("jquery", "1.6.4");
             google.load("jqueryui", "1.8.16");
         </script>
+        <script src="scripts/jquery.qtip.min.js" type="text/javascript"></script>
         <script src="scripts/tfClientSide.js" type="text/javascript"></script>
         <!-- End Includes -->
     </body>

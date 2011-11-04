@@ -7,6 +7,7 @@ $(document).ready(function () {
 var TextFormatter = TextFormatter || {
     init: function () {
         var container = $('#tf');
+        var txtAreas = $('.tf_input');
         var input = $('#txtInput');
         var output = $('#txtOutput');
         var submitModifiers = $('#btnSubmitModifiers');
@@ -65,13 +66,32 @@ var TextFormatter = TextFormatter || {
             }
         });
 
+        //add click events to buttons that need to slide the page left and right
         submitModifiers.click(function () {
             TextFormatter.slideLayout(container, modifierContainer, modifierOutput, flipBackButton, true);
         });
         flipBackButton.click(function () {
             TextFormatter.slideLayout(container, modifierContainer, modifierInput, flipBackButton, false);
         });
+        
+        txtAreas.qtip({
+            content: {
+                text: 'Character Count: 0<br />Word Count: 0'
+            },
+            position: {
+                target: 'mouse',
+                adjust: {
+                    x: 20
+                }
+            }
+        });
 
+        txtAreas.hover(function () {
+            txtAreas.qtip('option', 'content.text', 'Character Count: ' + $(this).val().length + '<br />Word Count: ' + TextFormatter.Helpers.CountWords($(this).val().toString()));
+        });
+        txtAreas.keyup(function () {
+            txtAreas.qtip('option', 'content.text', 'Character Count: ' + $(this).val().length + '<br />Word Count: ' + TextFormatter.Helpers.CountWords($(this).val().toString()));
+        });
     },
     submitModifiers: function(input, outputField){
         var output = input;
@@ -109,7 +129,7 @@ var TextFormatter = TextFormatter || {
 
         if (selectedInput == 'sql') {
             //text to sql conversion
-            output = TextFormatter.SqlFunctions.Format(CleanSpacing(output));
+            output = TextFormatter.SqlFunctions.Format(TextFormatter.Helpers.CleanSpacing(output));
         }
 
         //do text to SB conversion after line breaks
@@ -466,7 +486,7 @@ var TextFormatter = TextFormatter || {
                         case 1:
                             //from statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 4) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 4) + '\n';
                             i = i + 4;
                             lastToken = 'from';
                             lastNonFormattingToken = 'from';
@@ -474,7 +494,7 @@ var TextFormatter = TextFormatter || {
                         case 2:
                             //where statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 5) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 5) + '\n';
                             i = i + 5;
                             lastToken = 'where';
                             lastNonFormattingToken = 'where';
@@ -487,7 +507,7 @@ var TextFormatter = TextFormatter || {
                                 i = i + 8;
                             } else {
                                 output = output + '\n';
-                                output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 8) + '\n';
+                                output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 8) + '\n';
                                 lastToken = 'order by';
                                 lastNonFormattingToken = 'order by';
                                 i = i + 8;
@@ -496,7 +516,7 @@ var TextFormatter = TextFormatter || {
                         case 4:
                             //group by statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 8) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 8) + '\n';
                             i = i + 8;
                             lastToken = 'group by';
                             lastNonFormattingToken = 'group by';
@@ -504,7 +524,7 @@ var TextFormatter = TextFormatter || {
                         case 5:
                             //left outer join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 15);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 15);
                             i = i + 15;
                             skipTabs = true;
                             lastToken = 'left outer join';
@@ -513,7 +533,7 @@ var TextFormatter = TextFormatter || {
                         case 6:
                             //left inner join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 15);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 15);
                             i = i + 15;
                             skipTabs = true;
                             lastToken = 'left inner join';
@@ -522,7 +542,7 @@ var TextFormatter = TextFormatter || {
                         case 7:
                             //right outer join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 16);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 16);
                             i = i + 16;
                             skipTabs = true;
                             lastToken = 'right outer join';
@@ -531,7 +551,7 @@ var TextFormatter = TextFormatter || {
                         case 8:
                             //right inner join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 16);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 16);
                             i = i + 16;
                             skipTabs = true;
                             lastToken = 'right inner join';
@@ -540,7 +560,7 @@ var TextFormatter = TextFormatter || {
                         case 9:
                             //left join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 9);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 9);
                             i = i + 9;
                             skipTabs = true;
                             lastToken = 'left join';
@@ -549,7 +569,7 @@ var TextFormatter = TextFormatter || {
                         case 10:
                             //right join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 10);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 10);
                             i = i + 10;
                             skipTabs = true;
                             lastToken = 'right join';
@@ -558,7 +578,7 @@ var TextFormatter = TextFormatter || {
                         case 11:
                             //join statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 4);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 4);
                             i = i + 4;
                             skipTabs = true;
                             lastToken = 'join';
@@ -567,7 +587,7 @@ var TextFormatter = TextFormatter || {
                         case 12:
                             //union statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 5) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 5) + '\n';
                             i = i + 5;
                             skipTabs = true;
                             lastToken = 'union';
@@ -577,7 +597,7 @@ var TextFormatter = TextFormatter || {
                             //( statement is the next token
                             if (lastToken == 'into') {
                                 output = output + '\n';
-                                output = AddTabs(output, currentTabs) + '(\n';
+                                output = TextFormatter.Helpers.AddTabs(output, currentTabs) + '(\n';
                                 currentTabs++;
                             } else if (lastToken != 'from' && lastToken != 'in' && lastToken != 'values' && lastToken != 'set') {
                                 output = output + '(';
@@ -599,7 +619,7 @@ var TextFormatter = TextFormatter || {
                             //determine if output needs a newline and tabs. if the previous paraenthesis is on the same line, do not add new line
                             if (output.lastIndexOf("(") < output.lastIndexOf("\n")) {
                                 output = output + '\n';
-                                output = AddTabs(output, currentTabs);
+                                output = TextFormatter.Helpers.AddTabs(output, currentTabs);
                             }
 
                             output = output + ')';
@@ -651,7 +671,7 @@ var TextFormatter = TextFormatter || {
                         case 19:
                             //and statement is the next token
                             output = output + '\n'
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 3);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 3);
                             i = i + 3;
                             skipTabs = true;
                             lastToken = 'and';
@@ -660,7 +680,7 @@ var TextFormatter = TextFormatter || {
                         case 20:
                             //or statement is the next token
                             output = output + '\n'
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 2);
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 2);
                             i = i + 2;
                             skipTabs = true;
                             lastToken = 'or';
@@ -683,7 +703,7 @@ var TextFormatter = TextFormatter || {
                         case 23:
                             //values statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 6) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs) + input.substr(indexArray[lowestIndex], 6) + '\n';
                             i = i + 6;
                             lastToken = 'values';
                             lastNonFormattingToken = 'values';
@@ -691,7 +711,7 @@ var TextFormatter = TextFormatter || {
                         case 24:
                             //set statement is the next token
                             output = output + '\n';
-                            output = AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 3) + '\n';
+                            output = TextFormatter.Helpers.AddTabs(output, currentTabs - 1) + input.substr(indexArray[lowestIndex], 3) + '\n';
                             i = i + 3;
                             skipTabs = true;
                             lastToken = 'set';
@@ -701,7 +721,7 @@ var TextFormatter = TextFormatter || {
 
                     //add tabs
                     if (!skipTabs) {
-                        output = AddTabs(output, currentTabs);
+                        output = TextFormatter.Helpers.AddTabs(output, currentTabs);
                     }
                 } else {
                     //no more keywords found; read to the end
@@ -717,7 +737,7 @@ var TextFormatter = TextFormatter || {
             return output;
         }
     },
-    HelperFunctions: {
+    Helpers: {
         //remove new lines and tabs
         CleanSpacing: function(input) {
             var exp = /(\n|\t)/g
@@ -733,6 +753,16 @@ var TextFormatter = TextFormatter || {
                 output = output + '\t';
             }
             return output;
+    },
+        CountWords: function (input) {
+            var count = 0;
+            if(input.length > 0){
+                var lines = input.split('\n');
+                for(i=0; i<lines.length; i++){
+                    count += lines[i].split(' ').length;
+                }
+            }
+            return count;
         }
     }
 }

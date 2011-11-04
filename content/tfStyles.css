@@ -28,31 +28,26 @@
 
 .tf_input { padding:5px; }
 
-.button {
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial, Helvetica, sans-serif;
-	padding: .5em 2em .55em;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	border-radius: .5em;
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	color: #e9e9e9;
-	border: solid 1px #999;
-	background: #6e6e6e;
-}
-.button:hover {
-	text-decoration: none;
-	background: #616161;
-}
-.button:active {
-	position: relative;
-	top: 1px;
-	color: #afafaf;
-}
+#tf_textarea_info { }
+.tf_textarea_info_value_header { font-weight:bold; }
+.tf_textarea_info_value { }
+
+.button { display: inline-block; outline: none; cursor: pointer; text-align: center; text-decoration: none; font-weight:bold; font-size:14px; font: Arial, Helvetica, sans-serif; padding: .5em 2em .55em; text-shadow: 0 1px 1px rgba(0,0,0,.3); box-shadow: 0 1px 2px rgba(0,0,0,.2); color: #fff; }
+.button:hover {	text-decoration: none; }
+.button:active { position: relative; top: 1px; color: #afafaf; }
+.input-bar-button { background-color:#d95a00; border: solid 2px #dfdfdf; }
+.input-bar-button:hover { background-color:#d95a00; }
+.modifier-button { background-color:#d95a00; border: solid 2px #393939; }
+.modifier-button:hover { background-color:#d95a00; }
 
 .shown{ display:inline; }
 .hidden{ display:none; }
 .clear { clear: both; }
+
+.tooltip{
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 3;
+   display: none;
+}
