@@ -15,20 +15,26 @@ var TextFormatter = TextFormatter || {
         var modifierInput = $('#tf_modifier_input');
         var modifierOutput = $('#tf_modifier_output');
         var flipBackButton = $('#btnFlipBack');
+        var ckbAddLineBreaks = $('#ckbAddLineBreaks');
+        var ckbRemoveLineBreaks = $('#ckbRemoveLineBreaks');
 
         //add checked event for check boxes
-        $('#ckbAddLineBreaks').change(function () {
+        ckbAddLineBreaks.change(function () {
             if ($(this).attr("checked")) {
-                $('.tf_hidden_modifier_property').show(250);
-                $('#ckbRemoveLineBreaks').attr("checked", false);
+                ckbRemoveLineBreaks.attr("checked", false);
+                ckbRemoveLineBreaks.parent().children('.tf_hidden_modifier_property').hide(250);
+                ckbAddLineBreaks.parent().children('.tf_hidden_modifier_property').show(250);
             } else {
-                $('.tf_hidden_modifier_property').hide(250);
+                ckbAddLineBreaks.parent().children('.tf_hidden_modifier_property').hide(250);
             }
         });
-        $('#ckbRemoveLineBreaks').change(function () {
+        ckbRemoveLineBreaks.change(function () {
             if ($(this).attr("checked")) {
-                $('#ckbAddLineBreaks').attr("checked", false);
-                $('.tf_hidden_modifier_property').hide(250);
+                ckbAddLineBreaks.attr("checked", false);
+                ckbAddLineBreaks.parent().children('.tf_hidden_modifier_property').hide(250);
+                ckbRemoveLineBreaks.parent().children('.tf_hidden_modifier_property').show(250);
+            } else {
+                ckbRemoveLineBreaks.parent().children('.tf_hidden_modifier_property').hide(250);
             }
         });
 
@@ -124,7 +130,7 @@ var TextFormatter = TextFormatter || {
         if ($('#ckbAddLineBreaks').attr("checked")) {
             output = TextFormatter.LineFormatting.AddLineBreaks(output, $('#txtCharsPerLine').val(), $('#txtLineBreakCharacter').val())
         } else if ($('#ckbRemoveLineBreaks').attr("checked")) {
-            output = TextFormatter.LineFormatting.RemoveLineBreaks(output)
+            output = TextFormatter.LineFormatting.RemoveLineBreaks(output, $('#txtLineBreakReplacement').val())
         }
 
         if (selectedInput == 'sql') {
@@ -210,10 +216,11 @@ var TextFormatter = TextFormatter || {
             //return the new string
             return output;
         },
-        RemoveLineBreaks: function (input) {
+        RemoveLineBreaks: function (input, lineBreakReplacement) {
             var output = '';
             for (i = 0; i < input.length; i++) {
                 if (input.charAt(i) != '\n') output = output + input.charAt(i);
+                else output = output + lineBreakReplacement;
             }
             return output;
         }
