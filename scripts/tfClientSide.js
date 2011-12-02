@@ -18,6 +18,9 @@ var TextFormatter = TextFormatter || {
         var ckbAddLineBreaks = $('#ckbAddLineBreaks');
         var ckbRemoveLineBreaks = $('#ckbRemoveLineBreaks');
 
+        //focus on the initial text box
+        input.focus();
+
         //add checked event for check boxes
         ckbAddLineBreaks.change(function () {
             if ($(this).attr("checked")) {
@@ -58,11 +61,6 @@ var TextFormatter = TextFormatter || {
             output.val('');
         });
 
-        //add click event for the submit button
-        submitModifiers.click(function () {
-            TextFormatter.submitModifiers(input.val(), output);
-        });
-
         //add change event for output type ddl to show var field if stringbuilder selected
         $('#ddlOutputType').change(function () {
             if ($(this).val() == 'vbsb' || $(this).val() == 'csharp') {
@@ -75,11 +73,21 @@ var TextFormatter = TextFormatter || {
         //add click events to buttons that need to slide the page left and right
         submitModifiers.click(function () {
             TextFormatter.slideLayout(container, modifierContainer, modifierOutput, flipBackButton, true);
+            TextFormatter.submitModifiers(input.val(), output);
         });
         flipBackButton.click(function () {
             TextFormatter.slideLayout(container, modifierContainer, modifierInput, flipBackButton, false);
         });
+
+        //add ctrl-enter event to submit modifier
+        container.keypress(function (event) {
+            if (event.which == 10) {
+                if (output.is(":focus")) flipBackButton.click();
+                else submitModifiers.click();
+            }
+        });
         
+        //add character count and word count tooltip to text areas
         txtAreas.qtip({
             content: {
                 text: 'Character Count: 0<br />Word Count: 0'
@@ -156,6 +164,7 @@ var TextFormatter = TextFormatter || {
 
         //display output
         outputField.val(output);
+        outputField.focus();
     },
     slideLayout: function(container, modifierContainer, modifierDestination, backButton, forward){
         if (forward) {
